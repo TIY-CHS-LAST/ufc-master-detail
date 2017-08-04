@@ -9,6 +9,7 @@ class App extends Component {
       <Provider store={store} >
         <BrowserRouter>
           <Route exact path='/' component={FighterList} />
+          <Route exact path='/:id' component={FighterDetail} />
         </BrowserRouter>
       </Provider>
     );
