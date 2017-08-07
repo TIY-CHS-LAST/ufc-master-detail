@@ -1,19 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Provider } from 'react-redux'
-import store from './store';
+import store from './store'
 import FighterList from './components/FighterList'
+import FighterDetail from './components/FightDetail'
 import { BrowserRouter, Route } from 'react-router-dom'
 class App extends Component {
-  render() {
+  render () {
     return (
-      <Provider store={store} >
+      <Provider store={store}>
         <BrowserRouter>
-          <Route exact path='/' component={FighterList} />
-          <Route exact path='/:id' component={FighterDetail} />
+          <div>
+            <Route exact path='/' component={FighterList} />
+            <Route exact path='/:fighterId' component={FighterDetail} />
+          </div>
         </BrowserRouter>
       </Provider>
-    );
+    )
   }
 }
 
-export default App;
+export default App

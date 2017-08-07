@@ -3,6 +3,12 @@ body {
   margin: 0;
   background-color: #505050;
 }
+.detail {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  background-color: #fff;
+}
 .fighters {
   display: block;
   width: 90%;
