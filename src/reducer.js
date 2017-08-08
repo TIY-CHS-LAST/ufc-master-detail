@@ -1,7 +1,6 @@
 import { ADD_FIGHTER, GET_FIGHTERS, GET_CURRENT_FIGHTER } from './constants'
 import { combineReducers } from 'redux'
-import fighters from './fighters'
-const defaultState = { fighters, currentFighter: {} }
+const defaultState = { isFetching: false, fighters: [], currentFighter: {} }
 
 function fighterReducer (state = defaultState, action) {
   switch (action.type) {
@@ -10,11 +9,18 @@ function fighterReducer (state = defaultState, action) {
         fighters: [ ...state.fighters, action.payload ]
       })
     case GET_FIGHTERS:
-      console.log('get fighters is getting to the reducer', action)
-      return Object.assign({}, state, { fighters: action.payload })
+      return Object.assign({}, state, {
+        isFetching: false,
+        fighters: action.payload
+      })
     case GET_CURRENT_FIGHTER:
       console.log('in da reducer', action)
-      return Object.assign({}, state, { currentFighter: action.payload })
+      return Object.assign({}, state, {
+        isFetching: false,
+        currentFighter: action.payload
+      })
+    case 'FETCHING_FIGHTER':
+      return Object.assign({}, state, { isFetching: true })
     default:
       return state
   }

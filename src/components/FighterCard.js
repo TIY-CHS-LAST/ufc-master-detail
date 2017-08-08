@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 const FighterCard = function (props) {
-  console.log('dispatch', props)
   return (
     <section className='fighter'>
       <div className='division'>${props.fighter.weight_class}</div>
       <img
-        src={props.fighter.profile_image}
+        src={props.fighter.thumbnail}
         alt={` ${props.fighter.first_name} ${props.fighter.last_name} `}
       />
       <p className='name'>

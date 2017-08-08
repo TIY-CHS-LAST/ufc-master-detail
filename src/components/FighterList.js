@@ -1,24 +1,32 @@
 import React, { Component } from 'react'
 import FighterCard from './FighterCard'
 import { connect } from 'react-redux'
-import { getFighters, getFighter } from '../actions'
+import { getFighters, getCurrentFighter } from '../actions'
+import LoadingComponent from './LoadingComponent'
+class FighterList extends Component {
+  componentWillMount () {
+    this.props.getAllFighters()
+  }
 
-const FighterList = function ({ fighters, getSelectedFighter }) {
-  return (
-    <section className='fighters'>
-      {
-        fighters
-          ? fighters.map(fighter => (
-            <FighterCard
-              key={fighter.id}
-              fighter={fighter}
-              getSelectedFighter={getSelectedFighter}
-            />
-          ))
-          : null
-      }
-    </section>
-  )
+  render () {
+    return (
+      <section className='fighters'>
+        {
+          this.props.isFetching
+            ? <LoadingComponent />
+            : this.props.fighters
+              ? this.props.fighters.map(fighter => (
+                <FighterCard
+                  key={fighter.id}
+                  fighter={fighter}
+                  getSelectedFighter={this.props.getSelectedFighter}
+                />
+              ))
+              : null
+        }
+      </section>
+    )
+  }
 }
 
 function mapStateToProps (state) {
@@ -26,8 +34,12 @@ function mapStateToProps (state) {
 }
 function mapDispatchToProps (dispatch) {
   return {
+    getAllFighters: () => {
+      console.log('in dispatch', dispatch)
+      dispatch(getFighters())
+    },
     getSelectedFighter: id => {
-      dispatch(getFighter(id))
+      dispatch(getCurrentFighter(id))
     }
   }
 }
